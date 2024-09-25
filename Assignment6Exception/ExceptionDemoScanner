@@ -1,0 +1,40 @@
+
+import java.util.Scanner;
+
+class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+class RegistrationProcess {
+    public void registerUser() {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Enter your name: ");
+        String name = input.nextLine();
+
+        System.out.print("Enter your age: ");
+        int age = input.nextInt();
+
+        try {
+            if (age < 18) {
+                throw new InvalidAgeException("Age must be 18 or above for registration.");
+            } else {
+                System.out.println("User " + name + " registered successfully");
+            }
+        } catch (InvalidAgeException e) {
+            System.out.println("Registration failed: " + e.getMessage());
+        } finally {
+            System.out.println("Registration process completed.");
+        }
+
+        input.close();
+    }
+}
+
+public class ExceptionDemoScanner{
+    public static void main(String[] args) {
+        RegistrationProcess registrationProcess = new RegistrationProcess();
+        registrationProcess.registerUser();
+    }
+}
